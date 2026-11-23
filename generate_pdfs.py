@@ -6,6 +6,7 @@ PDF Generator for NESFIC-D-37:
 """
 
 import sys
+import os
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -18,8 +19,13 @@ from reportlab.platypus import (
     PageBreak,
     KeepTogether,
     HRFlowable,
+    Image,
 )
 from reportlab.pdfgen import canvas
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PUBLIC_ASSETS = os.path.join(BASE_DIR, 'public', 'assets')
+PUBLIC_IMAGES = os.path.join(BASE_DIR, 'public', 'images')
 
 # Define Palette
 COLOR_NAVY = colors.HexColor('#0f172a')
@@ -177,7 +183,46 @@ def get_styles():
         leading=12,
         textColor=COLOR_NAVY
     ))
+    styles.add(ParagraphStyle(
+        'FigureCaption',
+        parent=styles['Normal'],
+        fontName='Helvetica-Bold',
+        fontSize=8,
+        leading=11,
+        textColor=COLOR_TEXT_MUTED,
+        alignment=1, # Center
+        spaceAfter=8
+    ))
     return styles
+
+
+def create_infographic_flowable(img_path, caption_text, styles, width=470, height=264):
+    """Packages a 16:9 widescreen infographic image into a flowable element with caption."""
+    if not os.path.exists(img_path):
+        return []
+    
+    img = Image(img_path, width=width, height=height)
+    img.hAlign = 'CENTER'
+    
+    # Wrap in subtle bordered container table
+    img_table = Table([[img]], colWidths=[width + 8])
+    img_table.setStyle(TableStyle([
+        ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+        ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+        ('BOX', (0,0), (-1,-1), 0.75, COLOR_BORDER),
+        ('BACKGROUND', (0,0), (-1,-1), colors.white),
+        ('PADDING', (0,0), (-1,-1), 4),
+    ]))
+    
+    caption = Paragraph(caption_text, styles['FigureCaption'])
+    
+    return [
+        Spacer(1, 6),
+        img_table,
+        Spacer(1, 4),
+        caption,
+        Spacer(1, 6)
+    ]
 
 
 def create_proposal_pdf(filename):
@@ -335,6 +380,15 @@ def create_proposal_pdf(filename):
                 story.append(Paragraph(para.strip(), styles['CustomBody']))
         story.append(Spacer(1, 4))
 
+        # Embed Architecture Infographic under Section 4
+        if "4. Technology & Solution Architecture" in title:
+            arch_img = os.path.join(PUBLIC_ASSETS, "infographic_architecture.png")
+            story.extend(create_infographic_flowable(
+                arch_img,
+                "Figure 4.1: Sewa-Drishti Enterprise Telemetry & SLA Monitoring Architecture (Event Ingestion, ASDC TimescaleDB, DOPI Core & Notification)",
+                styles
+            ))
+
     # Insert Budget Table under Section 12
     budget_table_data = [
         [
@@ -390,6 +444,13 @@ def create_proposal_pdf(filename):
     ]))
     story.append(budget_table)
     story.append(Spacer(1, 8))
+
+    budget_img = os.path.join(PUBLIC_ASSETS, "infographic_grant_budget.png")
+    story.extend(create_infographic_flowable(
+        budget_img,
+        "Figure 12.1: NESFIC-D-37 Problem Statement Grant Allocation & Resource Blueprint (₹40.00 Lakhs Total Grant with 50% Technical Core)",
+        styles
+    ))
 
     s12_continuation = (
         "<b>Key Risks & Mitigations:</b>\n"
@@ -468,7 +529,15 @@ def create_proof_of_work_pdf(filename):
         ('ALIGN', (0,0), (-1,-1), 'CENTER'),
     ]))
     story.append(metrics_table)
-    story.append(Spacer(1, 10))
+    story.append(Spacer(1, 6))
+
+    # Figure 1: Architecture Infographic
+    arch_img = os.path.join(PUBLIC_ASSETS, "infographic_architecture.png")
+    story.extend(create_infographic_flowable(
+        arch_img,
+        "Figure 1: Sewa-Drishti Enterprise Telemetry & SLA Monitoring Architecture (Event Ingestion, ASDC TimescaleDB, DOPI Core & Notification)",
+        styles
+    ))
 
     # 2. Mathematical Scoring Model (DOPI)
     story.append(Paragraph("2. Mathematical Formulation: Dynamic DPS Performance Index (DOPI)", styles['SectionHeading']))
@@ -488,7 +557,15 @@ def create_proof_of_work_pdf(filename):
         ('PADDING', (0,0), (-1,-1), 8),
     ]))
     story.append(formula_table)
-    story.append(Spacer(1, 10))
+    story.append(Spacer(1, 6))
+
+    # Figure 2: DOPI Multi-Factor Scoring
+    dopi_img = os.path.join(PUBLIC_ASSETS, "infographic_dopi_scoring.png")
+    story.extend(create_infographic_flowable(
+        dopi_img,
+        "Figure 2: DOPI Multi-Factor Scoring Formulation (4-Pillar Evaluation & Standardized Performance Tiers)",
+        styles
+    ))
 
     # 3. Delay Attribution & Stage Bottleneck
     story.append(Paragraph("3. Workflow Bottleneck & Stage-Wise Delay Attribution", styles['SectionHeading']))
@@ -544,7 +621,15 @@ def create_proof_of_work_pdf(filename):
         ('ROWBACKGROUNDS', (0,1), (-1,-1), [colors.white, COLOR_LIGHT_BG]),
     ]))
     story.append(stage_table)
-    story.append(Spacer(1, 10))
+    story.append(Spacer(1, 6))
+
+    # Figure 3: Bottleneck Process Mining Infographic
+    bottleneck_img = os.path.join(PUBLIC_ASSETS, "infographic_bottlenecks.png")
+    story.extend(create_infographic_flowable(
+        bottleneck_img,
+        "Figure 3: RTPS Service Delivery Process Mining & Stage Bottleneck Diagnostic (Highlighting Stage 2 Field Inquest Latency)",
+        styles
+    ))
 
     # 4. Assam RTPS Statutory Recovery Matrix
     story.append(Paragraph("4. Assam RTPS Act Section 7 & 9 Enforcement Model", styles['SectionHeading']))
@@ -578,7 +663,15 @@ def create_proof_of_work_pdf(filename):
         ('ROWBACKGROUNDS', (0,1), (-1,-1), [colors.white, COLOR_LIGHT_BG]),
     ]))
     story.append(legal_table)
-    story.append(Spacer(1, 10))
+    story.append(Spacer(1, 6))
+
+    # Figure 4: Section 7 & 9 Penalty & DBT Flowchart
+    penalty_img = os.path.join(PUBLIC_ASSETS, "infographic_penalty_dbt.png")
+    story.extend(create_infographic_flowable(
+        penalty_img,
+        "Figure 4: Assam RTPS Act Section 7 & 9 Enforcement Model (Automated Penalty Formulation & 80% Citizen DBT Compensation)",
+        styles
+    ))
 
     # 5. Indicative Resource & Budget Allocation
     story.append(Paragraph("5. Indicative Resource & Budget Allocation (₹40 Lakhs Total Grant)", styles['SectionHeading']))
@@ -635,7 +728,15 @@ def create_proof_of_work_pdf(filename):
         ('BACKGROUND', (0,-1), (-1,-1), colors.HexColor('#e2e8f0')),
     ]))
     story.append(budget_table)
-    story.append(Spacer(1, 14))
+    story.append(Spacer(1, 6))
+
+    # Figure 5: Budget Blueprint
+    budget_img = os.path.join(PUBLIC_ASSETS, "infographic_grant_budget.png")
+    story.extend(create_infographic_flowable(
+        budget_img,
+        "Figure 5: Indicative Grant Allocation & Resource Blueprint (₹40.00 Lakhs Problem Statement Grant Deployment)",
+        styles
+    ))
 
     # Verification Sign-off Box
     signoff_data = [
