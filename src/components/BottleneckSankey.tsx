@@ -1,6 +1,6 @@
 import React from 'react';
 import { StageBottleneck } from '../types/rtps';
-import { AlertCircle, Clock, Zap, ArrowRight } from 'lucide-react';
+import { Zap } from 'lucide-react';
 
 interface BottleneckSankeyProps {
   bottlenecks: StageBottleneck[];
@@ -8,16 +8,16 @@ interface BottleneckSankeyProps {
 
 export const BottleneckSankey: React.FC<BottleneckSankeyProps> = ({ bottlenecks }) => {
   return (
-    <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
+    <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-base font-bold text-white flex items-center gap-2">
+          <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
             <span>Workflow Bottleneck & Stage-wise Delay Attribution</span>
-            <span className="text-xs px-2 py-0.5 rounded bg-amber-950 text-amber-400 border border-amber-800 font-normal">
+            <span className="text-xs px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200 font-semibold">
               Root-Cause Analysis
             </span>
           </h2>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-500 mt-0.5">
             Pinpoints exact stages where citizen applications stall beyond statutory budget hours
           </p>
         </div>
@@ -34,32 +34,32 @@ export const BottleneckSankey: React.FC<BottleneckSankeyProps> = ({ bottlenecks 
               key={stage.stage}
               className={`p-3.5 rounded-xl border relative flex flex-col justify-between transition-all ${
                 isSevere
-                  ? 'bg-rose-950/20 border-rose-800/80 ring-1 ring-rose-500/30'
+                  ? 'bg-rose-50/70 border-rose-300 ring-1 ring-rose-200'
                   : isOverBudget
-                  ? 'bg-amber-950/20 border-amber-800/60'
-                  : 'bg-slate-950/60 border-slate-800'
+                  ? 'bg-amber-50/70 border-amber-300'
+                  : 'bg-slate-50 border-slate-200'
               }`}
             >
               <div>
-                <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
-                  <span className="font-mono text-slate-500">Stage 0{idx + 1}</span>
+                <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
+                  <span className="font-mono text-slate-500 font-semibold">Stage 0{idx + 1}</span>
                   {isSevere && (
-                    <span className="px-1.5 py-0.5 text-[10px] uppercase font-bold rounded bg-rose-950 text-rose-300 border border-rose-800">
+                    <span className="px-1.5 py-0.5 text-[10px] uppercase font-bold rounded bg-rose-100 text-rose-800 border border-rose-200">
                       Major Bottleneck
                     </span>
                   )}
                 </div>
-                <h3 className="font-semibold text-slate-200 text-xs tracking-tight line-clamp-2 min-h-[32px]">
+                <h3 className="font-semibold text-slate-800 text-xs tracking-tight line-clamp-2 min-h-[32px]">
                   {stage.stage}
                 </h3>
               </div>
 
-              <div className="mt-3 pt-2 border-t border-slate-800/60 space-y-1.5 text-xs">
+              <div className="mt-3 pt-2 border-t border-slate-200 space-y-1.5 text-xs">
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-400">Avg Time:</span>
+                  <span className="text-slate-500">Avg Time:</span>
                   <span
                     className={`font-mono font-bold ${
-                      isOverBudget ? 'text-rose-400' : 'text-emerald-400'
+                      isOverBudget ? 'text-rose-600' : 'text-emerald-700'
                     }`}
                   >
                     {stage.avgHoursSpent}h
@@ -70,18 +70,18 @@ export const BottleneckSankey: React.FC<BottleneckSankeyProps> = ({ bottlenecks 
                   <span className="font-mono">{stage.statutoryBudgetHours}h</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-400">Breach Share:</span>
+                  <span className="text-slate-500">Breach Share:</span>
                   <span
                     className={`font-mono font-bold ${
-                      isSevere ? 'text-rose-400' : 'text-amber-400'
+                      isSevere ? 'text-rose-600' : 'text-amber-700'
                     }`}
                   >
                     {stage.breachRate}%
                   </span>
                 </div>
-                <div className="flex justify-between items-center text-slate-400 pt-1 border-t border-slate-800/40">
+                <div className="flex justify-between items-center text-slate-500 pt-1 border-t border-slate-200">
                   <span>Stalled Apps:</span>
-                  <span className="font-mono text-white font-semibold">
+                  <span className="font-mono text-slate-900 font-bold">
                     {stage.activeStalledCount.toLocaleString()}
                   </span>
                 </div>
@@ -92,10 +92,10 @@ export const BottleneckSankey: React.FC<BottleneckSankeyProps> = ({ bottlenecks 
       </div>
 
       {/* Root Cause Insight Box */}
-      <div className="mt-2 p-3.5 rounded-lg bg-sky-950/30 border border-sky-800/50 flex items-start gap-3 text-xs text-sky-200">
-        <Zap className="h-4 w-4 text-sky-400 flex-shrink-0 mt-0.5" />
+      <div className="mt-2 p-3.5 rounded-lg bg-sky-50 border border-sky-200 flex items-start gap-3 text-xs text-sky-900">
+        <Zap className="h-4 w-4 text-sky-600 flex-shrink-0 mt-0.5" />
         <div>
-          <span className="font-bold text-sky-300">Algorithmic Insight:</span> Stage 02 (Field Verification by Lot Mandal / Field Functionaries) accounts for <span className="font-bold text-white">64.8% of all SLA breaches</span> across Assam. Applications spend an average of 112.4 hours here vs. statutory budget of 72 hours. Enabling geo-tagged field verification mobile workflows and auto-delegation is predicted to reduce statewide breach volume by 52%.
+          <span className="font-bold text-sky-950">Algorithmic Insight:</span> Stage 02 (Field Verification by Lot Mandal / Field Functionaries) accounts for <span className="font-bold text-slate-900">64.8% of all SLA breaches</span> across Assam. Applications spend an average of 112.4 hours here vs. statutory budget of 72 hours. Enabling geo-tagged field verification mobile workflows and auto-delegation is predicted to reduce statewide breach volume by 52%.
         </div>
       </div>
     </div>

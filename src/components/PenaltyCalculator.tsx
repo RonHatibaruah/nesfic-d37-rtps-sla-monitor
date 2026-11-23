@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { IndianRupee, Calculator, Award, AlertCircle, FileCheck, ShieldAlert } from 'lucide-react';
 
 export const PenaltyCalculator: React.FC = () => {
   const [daysOverdue, setDaysOverdue] = useState<number>(5);
@@ -14,24 +13,24 @@ export const PenaltyCalculator: React.FC = () => {
   const stateTreasury = finalPenalty - applicantCompensation;
 
   return (
-    <div className="bg-slate-900/90 border border-slate-800 rounded-xl p-5 shadow-sm space-y-5">
+    <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-5">
       <div>
-        <h2 className="text-base font-bold text-white flex items-center gap-2">
+        <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
           <span>Assam RTPS Act (Sec 7 & 9) Penalty & Incentive Engine</span>
-          <span className="text-xs px-2 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800 font-normal">
+          <span className="text-xs px-2 py-0.5 rounded bg-purple-50 text-purple-700 border border-purple-200 font-semibold">
             Automated Enforcement
           </span>
         </h2>
-        <p className="text-xs text-slate-400 mt-0.5">
+        <p className="text-xs text-slate-500 mt-0.5">
           Computes statutory recovery from defaulting DPS officers and compensation payable to aggrieved citizens
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Controls */}
-        <div className="space-y-4 bg-slate-950 p-4 rounded-xl border border-slate-800">
+        <div className="space-y-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
           <div>
-            <label className="text-xs font-semibold text-slate-300 block mb-1">
+            <label className="text-xs font-semibold text-slate-700 block mb-1">
               Days Overdue Beyond Mandated SLA Timeline:
             </label>
             <div className="flex items-center gap-3">
@@ -41,9 +40,9 @@ export const PenaltyCalculator: React.FC = () => {
                 max="60"
                 value={daysOverdue}
                 onChange={(e) => setDaysOverdue(Number(e.target.value))}
-                className="w-full accent-sky-500"
+                className="w-full accent-sky-600"
               />
-              <span className="font-mono text-base font-bold text-sky-400 w-12 text-right">
+              <span className="font-mono text-base font-bold text-sky-700 w-12 text-right">
                 {daysOverdue}d
               </span>
             </div>
@@ -51,14 +50,14 @@ export const PenaltyCalculator: React.FC = () => {
 
           <div className="grid grid-cols-2 gap-3 pt-2">
             <div>
-              <label className="text-xs text-slate-400 block mb-1">
+              <label className="text-xs text-slate-600 block mb-1">
                 Statutory Fine / Day (INR):
               </label>
               <input
                 type="number"
                 value={perDayRate}
                 onChange={(e) => setPerDayRate(Number(e.target.value))}
-                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white font-mono focus:border-sky-500"
+                className="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-xs text-slate-900 font-mono focus:border-sky-500"
               />
               <span className="text-[10px] text-slate-500 mt-0.5 block">
                 RTPS Act baseline: ₹250/day
@@ -66,14 +65,14 @@ export const PenaltyCalculator: React.FC = () => {
             </div>
 
             <div>
-              <label className="text-xs text-slate-400 block mb-1">
+              <label className="text-xs text-slate-600 block mb-1">
                 Citizen Share (%):
               </label>
               <input
                 type="number"
                 value={applicantCompensationPercent}
                 onChange={(e) => setApplicantCompensationPercent(Number(e.target.value))}
-                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white font-mono focus:border-sky-500"
+                className="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-xs text-slate-900 font-mono focus:border-sky-500"
               />
               <span className="text-[10px] text-slate-500 mt-0.5 block">
                 Disbursed to citizen bank account
@@ -81,13 +80,13 @@ export const PenaltyCalculator: React.FC = () => {
             </div>
           </div>
 
-          <div className="pt-2 border-t border-slate-800">
-            <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-300">
+          <div className="pt-2 border-t border-slate-200">
+            <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-700 font-medium">
               <input
                 type="checkbox"
                 checked={isWillfulDefault}
                 onChange={(e) => setIsWillfulDefault(e.target.checked)}
-                className="rounded accent-sky-500"
+                className="rounded accent-sky-600"
               />
               <span>Trigger Adverse Entry in Annual Confidential Report (ACR)</span>
             </label>
@@ -98,18 +97,18 @@ export const PenaltyCalculator: React.FC = () => {
         </div>
 
         {/* Results Card */}
-        <div className="bg-gradient-to-br from-slate-950 to-slate-900 p-5 rounded-xl border border-slate-800 flex flex-col justify-between">
+        <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
           <div className="space-y-4">
-            <div className="flex items-center justify-between text-xs text-slate-400">
+            <div className="flex items-center justify-between text-xs text-slate-500">
               <span className="uppercase font-semibold tracking-wider">Statutory Recovery Order</span>
-              <span className="px-2 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-800 text-[10px] font-bold">
+              <span className="px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 text-[10px] font-bold">
                 ENFORCEABLE DOCKET
               </span>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-center">
-              <span className="text-xs text-slate-400 block">Total Penalty Deductible from DPS Salary</span>
-              <div className="text-3xl font-extrabold text-rose-400 font-mono mt-1">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-center">
+              <span className="text-xs text-slate-600 block">Total Penalty Deductible from DPS Salary</span>
+              <div className="text-3xl font-extrabold text-rose-600 font-mono mt-1">
                 ₹{finalPenalty.toLocaleString()}
               </div>
               <span className="text-[11px] text-slate-500 block mt-1">
@@ -118,17 +117,17 @@ export const PenaltyCalculator: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-xs">
-              <div className="p-3 rounded-lg bg-emerald-950/20 border border-emerald-800/40">
-                <span className="text-slate-400 block">Direct Citizen Compensation:</span>
-                <span className="font-mono text-emerald-400 font-bold text-base mt-0.5 block">
+              <div className="p-3 rounded-lg bg-emerald-50 border border-emerald-200">
+                <span className="text-slate-600 block">Direct Citizen Compensation:</span>
+                <span className="font-mono text-emerald-800 font-bold text-base mt-0.5 block">
                   ₹{applicantCompensation.toLocaleString()}
                 </span>
                 <span className="text-[10px] text-slate-500">Auto-credited via DBT / PFMS</span>
               </div>
 
-              <div className="p-3 rounded-lg bg-sky-950/20 border border-sky-800/40">
-                <span className="text-slate-400 block">State Administrative Fund:</span>
-                <span className="font-mono text-sky-400 font-bold text-base mt-0.5 block">
+              <div className="p-3 rounded-lg bg-sky-50 border border-sky-200">
+                <span className="text-slate-600 block">State Administrative Fund:</span>
+                <span className="font-mono text-sky-800 font-bold text-base mt-0.5 block">
                   ₹{stateTreasury.toLocaleString()}
                 </span>
                 <span className="text-[10px] text-slate-500">Credited to Head of Account</span>
@@ -136,9 +135,9 @@ export const PenaltyCalculator: React.FC = () => {
             </div>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
-            <span className="text-xs text-slate-400">Status in appellate chain:</span>
-            <button className="px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold shadow transition-colors">
+          <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between">
+            <span className="text-xs text-slate-500">Status in appellate chain:</span>
+            <button className="px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold shadow-xs transition-colors">
               Export Statutory Recovery Memo (.PDF)
             </button>
           </div>
