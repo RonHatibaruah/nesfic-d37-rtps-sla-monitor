@@ -1,5 +1,6 @@
 # Sewa-Drishti | Continuous RTPS SLA Monitoring Platform
 
+[![Cloudflare Pages](https://img.shields.io/badge/Deployed%20on-Cloudflare%20Pages-f38020.svg)](https://nesfic-d37-rtps-sla-monitor.pages.dev)
 [![NESFIC 2026](https://img.shields.io/badge/NESFIC%202026-Challenge%20NESFIC--D--37-blue.svg)](https://startup.assam.gov.in/nesfic26/)
 [![Govt of Assam](https://img.shields.io/badge/Government%20of%20Assam-Administrative%20Reforms%20Dept-emerald.svg)](https://art.assam.gov.in/)
 [![Sewa Setu](https://img.shields.io/badge/Ecosystem-Sewa%20Setu%20%7C%20ASCRTPS-indigo.svg)](https://sewasetu.assam.gov.in/)

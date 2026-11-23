@@ -308,8 +308,8 @@ A **90-Day Controlled Pilot** will run across 3 diverse administrative districts
 *(Video Walkthrough Outline: 3-minute screen recording demonstrating: 1. Executive statewide compliance overview, 2. Live district drill-down into Kamrup Metro, 3. Detection of a chronic underperforming circle officer, 4. Auto-generation of a Section 7 statutory recovery notice, and 5. T-48h pre-breach alert delivery).*
 
 ### 3. Product / Website URL (Optional Field)
-`http://localhost:5181/` *(Active Local Dev Server)*  
-Staging URL: `https://sewa-drishti.assam.gov.in/preview`
+`https://nesfic-d37-rtps-sla-monitor.pages.dev` *(Live Deployed Application on Cloudflare)*  
+Local Dev Server: `http://localhost:5181/`
 
 ### 4. Additional Supporting Material (Optional PDF)
 `NESFIC-D37_Technical_Architecture_and_Statutory_Compliance_Report.pdf` *(Under 10 MB)*
