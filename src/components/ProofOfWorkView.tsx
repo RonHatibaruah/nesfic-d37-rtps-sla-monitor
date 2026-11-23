@@ -1,5 +1,5 @@
 import React from 'react';
-import { Printer } from 'lucide-react';
+import { Printer, Download, FileText } from 'lucide-react';
 
 interface ProofOfWorkViewProps {
   onClose: () => void;
@@ -22,23 +22,39 @@ export const ProofOfWorkView: React.FC<ProofOfWorkViewProps> = ({ onClose }) => 
             </span>
           </h2>
           <p className="text-xs text-slate-500">
-            Formatted for NESFIC-D-37 submission · Click Print to export as clean PDF (&lt; 10 MB)
+            Formatted for NESFIC-D-37 submission · Direct PDF Download or Print to PDF (&lt; 10 MB)
           </p>
         </div>
 
         <div className="flex items-center gap-2">
+          <a
+            href="/Sewa-Drishti_NESFIC-D-37_Proof_of_Work.pdf"
+            download="Sewa-Drishti_NESFIC-D-37_Proof_of_Work.pdf"
+            className="px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center gap-1.5 shadow-sm transition-all"
+          >
+            <Download className="h-4 w-4" />
+            <span>Download Proof of Work PDF</span>
+          </a>
+          <a
+            href="/NESFIC-D-37_Complete_Proposal.pdf"
+            download="NESFIC-D-37_Complete_Proposal.pdf"
+            className="px-3.5 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs flex items-center gap-1.5 shadow-sm transition-all"
+          >
+            <FileText className="h-4 w-4" />
+            <span>Download Proposal PDF</span>
+          </a>
           <button
             onClick={handlePrint}
-            className="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center gap-1.5 shadow-sm transition-all"
+            className="px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs flex items-center gap-1.5 border border-slate-200 transition-all"
           >
             <Printer className="h-4 w-4" />
-            <span>Print / Save as PDF</span>
+            <span>Print View</span>
           </button>
           <button
             onClick={onClose}
             className="px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors border border-slate-200"
           >
-            Close View
+            Close
           </button>
         </div>
       </div>
