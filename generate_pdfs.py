@@ -72,7 +72,7 @@ class NumberedCanvas(canvas.Canvas):
 
         # Footer
         page_text = f"Page {self._pageNumber} of {page_count}"
-        self.drawString(54, 34, "Sewa-Drishti Platform · https://nesfic-d37-rtps-sla-monitor.pages.dev")
+        self.drawString(54, 34, "© 2026 RazorNext Software Pvt Ltd · Lead Applicant: Abhishek Satyam · NESFIC-D-37")
         self.drawRightString(541, 34, page_text)
         self.setStrokeColor(COLOR_BORDER)
         self.setLineWidth(0.5)
@@ -248,6 +248,7 @@ def create_proposal_pdf(filename):
         [
             Paragraph(
                 "<b>Challenge ID:</b> NESFIC-D-37 · <b>Track:</b> Government Track / Administration<br/>"
+                "<b>Lead Applicant:</b> Abhishek Satyam · <b>Organization:</b> RazorNext Software Pvt Ltd<br/>"
                 "<b>Host Department:</b> Administrative Reforms, Training, Pension & Public Grievances Department, Govt. of Assam<br/>"
                 "<b>Live Production App:</b> https://nesfic-d37-rtps-sla-monitor.pages.dev · <b>GitHub:</b> https://github.com/RonHatibaruah/nesfic-d37-rtps-sla-monitor",
                 styles['MetaText']
@@ -498,6 +499,27 @@ def create_proposal_pdf(filename):
     for para in s12_continuation.split('\n\n'):
         story.append(Paragraph(para.strip(), styles['CustomBody']))
 
+    story.append(Spacer(1, 12))
+
+    # Proposal Disclaimer Box
+    prop_disclaimer_data = [
+        [
+            Paragraph(
+                "<b>Statutory Disclaimer & Submission Integrity:</b><br/>"
+                "This technical proposal and solution blueprint for <b>Sewa-Drishti</b> is authored by <b>Abhishek Satyam (Lead Applicant)</b> and <b>RazorNext Software Pvt Ltd</b> for submission under Challenge <b>NESFIC-D-37</b> (North East Seva First Innovation Challenge 2026, AISF / Govt of Assam). All telemetry architectures, data models, and performance metrics demonstrated herein represent validated engineering prototypes custom-designed for the State of Assam RTPS statutory ecosystem.<br/>"
+                "<i>© 2026 RazorNext Software Pvt Ltd. All rights reserved.</i>",
+                styles['CustomBody']
+            )
+        ]
+    ]
+    prop_disc_table = Table(prop_disclaimer_data, colWidths=[487])
+    prop_disc_table.setStyle(TableStyle([
+        ('BACKGROUND', (0,0), (-1,-1), COLOR_LIGHT_BG),
+        ('BOX', (0,0), (-1,-1), 1, COLOR_BORDER),
+        ('PADDING', (0,0), (-1,-1), 8),
+    ]))
+    story.append(prop_disc_table)
+
     # Build Proposal Document
     doc.build(story, canvasmaker=NumberedCanvas)
     print(f"Generated: {filename}")
@@ -526,6 +548,7 @@ def create_proof_of_work_pdf(filename):
         [
             Paragraph(
                 "<b>Challenge ID:</b> NESFIC-D-37 · <b>Platform:</b> Sewa-Drishti (Continuous RTPS SLA Observability)<br/>"
+                "<b>Lead Applicant:</b> Abhishek Satyam · <b>Entity:</b> RazorNext Software Pvt Ltd<br/>"
                 "<b>Live Deployed App:</b> https://nesfic-d37-rtps-sla-monitor.pages.dev · <b>GitHub:</b> https://github.com/RonHatibaruah/nesfic-d37-rtps-sla-monitor<br/>"
                 "<b>Department:</b> Administrative Reforms, Training, Pension & Public Grievances, Govt of Assam",
                 styles['MetaText']
@@ -804,9 +827,10 @@ def create_proof_of_work_pdf(filename):
     signoff_data = [
         [
             Paragraph(
-                "<b>Submission Verification & Integrity Declaration:</b><br/>"
-                "This Proof of Work document reflects verified technical artifacts, source code, and live cloud deployment for Challenge <b>NESFIC-D-37</b>. The working solution is accessible at <b>https://nesfic-d37-rtps-sla-monitor.pages.dev</b> and verified under the open-source repository <b>https://github.com/RonHatibaruah/nesfic-d37-rtps-sla-monitor</b>.<br/>"
-                "Submitted for: North East Seva First Innovation Challenge (NESFIC) 2026 · Assam Innovation & Startup Foundation (AISF), Govt. of Assam.",
+                "<b>Submission Verification, Integrity & Legal Declaration:</b><br/>"
+                "This Proof of Work document reflects verified technical architecture, source code, and live cloud deployment for Challenge <b>NESFIC-D-37</b>. The working solution is accessible at <b>https://nesfic-d37-rtps-sla-monitor.pages.dev</b> and tracking repository <b>https://github.com/RonHatibaruah/nesfic-d37-rtps-sla-monitor</b>.<br/>"
+                "Submitted by: <b>Abhishek Satyam (Lead Applicant)</b> · <b>RazorNext Software Pvt Ltd</b> for the North East Seva First Innovation Challenge (NESFIC) 2026, Assam Innovation & Startup Foundation (AISF), Govt. of Assam.<br/>"
+                "<i>© 2026 RazorNext Software Pvt Ltd. All rights reserved. Telemetry data and metrics demonstrated herein are simulated for technical evaluation.</i>",
                 styles['CustomBody']
             )
         ]

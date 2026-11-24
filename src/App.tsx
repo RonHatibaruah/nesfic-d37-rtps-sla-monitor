@@ -280,21 +280,72 @@ export const App: React.FC = () => {
       />
 
       {/* Footer */}
-      <footer className="bg-white border-t border-slate-200 text-xs text-slate-500 py-6 print:hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div>
-            <span className="font-semibold text-slate-700">
-              NESFIC-D-37 · Government Track · Assam Innovation & Startup Foundation (AISF)
-            </span>
-            <p className="mt-0.5">
-              Continuous RTPS Service Delivery Performance & SLA Monitoring Platform · Cloudflare: <a href="https://nesfic-d37-rtps-sla-monitor.pages.dev" target="_blank" rel="noopener noreferrer" className="text-sky-700 hover:underline">nesfic-d37-rtps-sla-monitor.pages.dev</a>
-            </p>
+      <footer className="bg-white border-t border-slate-200 text-xs text-slate-500 py-8 print:hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          {/* Main Footer Info Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pb-6 border-b border-slate-200">
+            {/* Column 1: Platform & Challenge */}
+            <div className="space-y-1.5">
+              <div className="flex items-center space-x-2">
+                <span className="font-bold text-slate-900 text-sm">SEWA-DRISHTI</span>
+                <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-sky-50 text-sky-700 border border-sky-200 rounded">
+                  NESFIC-D-37
+                </span>
+              </div>
+              <p className="text-slate-600 font-medium text-xs leading-relaxed">
+                Continuous RTPS Service Delivery Performance & SLA Monitoring Platform.
+              </p>
+              <p className="text-[11px] text-slate-400">
+                Production: <a href="https://nesfic-d37-rtps-sla-monitor.pages.dev" target="_blank" rel="noopener noreferrer" className="text-sky-600 hover:underline">nesfic-d37-rtps-sla-monitor.pages.dev</a>
+              </p>
+            </div>
+
+            {/* Column 2: Applicant & Organization */}
+            <div className="space-y-1.5">
+              <span className="text-slate-900 font-bold block text-xs uppercase tracking-wider">
+                Innovation Lead & Engineering
+              </span>
+              <p className="text-xs text-slate-700">
+                <strong>Lead Applicant:</strong> <span className="text-slate-900 font-semibold">Abhishek Satyam</span>
+              </p>
+              <p className="text-xs text-slate-700">
+                <strong>Organization:</strong> <span className="text-slate-900 font-semibold">RazorNext Software Pvt Ltd</span>
+              </p>
+              <p className="text-[11px] text-slate-500">
+                North East Seva First Innovation Challenge 2026 (AISF)
+              </p>
+            </div>
+
+            {/* Column 3: Government Stakeholder */}
+            <div className="space-y-1.5 md:text-right">
+              <span className="text-slate-900 font-bold block text-xs uppercase tracking-wider">
+                Host Department & State
+              </span>
+              <p className="text-xs text-slate-700 font-medium">
+                Department of Administrative Reforms, Training, Pension & Public Grievances
+              </p>
+              <p className="text-xs text-slate-600">
+                Government of Assam · Dispur, Guwahati
+              </p>
+            </div>
           </div>
-          <div className="text-right">
-            <span className="text-slate-600 font-medium">
-              Department of Administrative Reforms, Training, Pension & Public Grievances
-            </span>
-            <p className="mt-0.5 text-slate-500">Government of Assam</p>
+
+          {/* Legal Disclaimer Box */}
+          <div className="bg-slate-50 border border-slate-200 rounded-lg p-3 text-[11px] text-slate-600 leading-relaxed">
+            <strong className="text-slate-800 font-semibold block mb-0.5">Disclaimer:</strong>
+            This application (<span className="font-semibold text-slate-700">Sewa-Drishti</span>) is an advanced GovTech decision-support and telemetric SLA observability prototype engineered for the <strong>North East Seva First Innovation Challenge 2026 (Challenge ID: NESFIC-D-37)</strong> under the Assam Innovation & Startup Foundation (AISF), Department of Administrative Reforms, Training, Pension & Public Grievances, Government of Assam. Telemetry data feeds, citizen service queues, and compliance scores demonstrated herein are simulated for architectural validation, load testing, and technical evaluation.
+          </div>
+
+          {/* Bottom Copyright Bar */}
+          <div className="flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 pt-1 gap-2">
+            <div>
+              <span>© 2026 RazorNext Software Pvt Ltd. All rights reserved.</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <span>Lead Applicant: <strong className="text-slate-700">Abhishek Satyam</strong></span>
+              <span>·</span>
+              <span>State of Assam RTPS Ecosystem</span>
+            </div>
           </div>
         </div>
       </footer>
