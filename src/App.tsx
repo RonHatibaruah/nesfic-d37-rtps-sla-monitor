@@ -11,9 +11,8 @@ import { LiveApplicationsTable } from './components/LiveApplicationsTable';
 import { BudgetModal } from './components/BudgetModal';
 import { LoginModal } from './components/LoginModal';
 import { AdminPanel } from './components/AdminPanel';
-import { ProofOfWorkView } from './components/ProofOfWorkView';
 import { TutorialModal } from './components/TutorialModal';
-import { IndianRupee, ArrowRight, ShieldCheck, Lock, FileText } from 'lucide-react';
+import { IndianRupee, ArrowRight, ShieldCheck, Lock } from 'lucide-react';
 import {
   MOCK_APPLICATIONS,
   MOCK_DPS_RECORDS,
@@ -30,7 +29,6 @@ export const App: React.FC = () => {
   // Modals & Panels State
   const [isBudgetOpen, setIsBudgetOpen] = useState<boolean>(false);
   const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
-  const [isProofOfWorkOpen, setIsProofOfWorkOpen] = useState<boolean>(false);
   const [isTutorialOpen, setIsTutorialOpen] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState<{ name: string; email: string; role: string } | null>(null);
 
@@ -67,7 +65,6 @@ export const App: React.FC = () => {
         activeBreachCount={MOCK_ALERTS.length}
         onOpenBudget={() => setIsBudgetOpen(true)}
         onOpenLogin={() => setIsLoginOpen(true)}
-        onOpenProofOfWork={() => setIsProofOfWorkOpen(true)}
         onOpenTutorial={() => setIsTutorialOpen(true)}
         currentUser={currentUser}
       />
@@ -131,32 +128,25 @@ export const App: React.FC = () => {
                 </button>
               </div>
 
-              {/* 2. Admin Panel & Proof of Work Banner */}
+              {/* 2. Administrative Command Console Banner */}
               <div className="p-4 rounded-xl bg-white border border-slate-200 flex items-center justify-between gap-3 shadow-sm hover:border-slate-300 transition-all">
                 <div className="flex items-center gap-3">
-                  <div className="h-9 w-9 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center flex-shrink-0">
-                    <ShieldCheck className="h-5 w-5 text-emerald-600" />
+                  <div className="h-9 w-9 rounded-lg bg-sky-50 border border-sky-200 flex items-center justify-center flex-shrink-0">
+                    <ShieldCheck className="h-5 w-5 text-sky-600" />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className="text-sm font-bold text-slate-900">Administrative Panel & Proof of Work</h3>
-                      <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                      <h3 className="text-sm font-bold text-slate-900">Administrative Command Console</h3>
+                      <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-sky-50 text-sky-700 border border-sky-200">
                         Demo Ready
                       </span>
                     </div>
                     <p className="text-xs text-slate-500 mt-0.5">
-                      Statutory SLA rules, DPS load rebalancing, early warnings, and printable PDF dossier.
+                      Statutory SLA rules, DPS load rebalancing, early warnings, and automated show-cause workflows.
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-1.5 flex-shrink-0">
-                  <button
-                    onClick={() => setIsProofOfWorkOpen(true)}
-                    className="px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center gap-1 transition-all shadow-xs"
-                  >
-                    <FileText className="h-3 w-3" />
-                    <span>PDF</span>
-                  </button>
                   <button
                     onClick={() => {
                       if (currentUser) {
@@ -165,10 +155,10 @@ export const App: React.FC = () => {
                         setIsLoginOpen(true);
                       }
                     }}
-                    className="px-2.5 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold flex items-center gap-1 transition-all shadow-xs"
+                    className="px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold flex items-center gap-1.5 transition-all shadow-xs"
                   >
                     <Lock className="h-3 w-3" />
-                    <span>Admin</span>
+                    <span>{currentUser ? 'Admin Console' : 'Admin Login'}</span>
                   </button>
                 </div>
               </div>
@@ -267,11 +257,6 @@ export const App: React.FC = () => {
             <PenaltyCalculator />
             <DPSScoresTable dpsRecords={MOCK_DPS_RECORDS} />
           </div>
-        )}
-
-        {/* Proof of Work View (When Triggered) */}
-        {isProofOfWorkOpen && (
-          <ProofOfWorkView onClose={() => setIsProofOfWorkOpen(false)} />
         )}
       </main>
 

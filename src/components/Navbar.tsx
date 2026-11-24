@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Bell, AlertTriangle, RefreshCw, IndianRupee, Lock, FileText, UserCheck, BookOpen } from 'lucide-react';
+import { Shield, Bell, AlertTriangle, RefreshCw, IndianRupee, Lock, UserCheck, BookOpen } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: string;
@@ -9,7 +9,6 @@ interface NavbarProps {
   activeBreachCount: number;
   onOpenBudget: () => void;
   onOpenLogin: () => void;
-  onOpenProofOfWork: () => void;
   onOpenTutorial: () => void;
   currentUser: { name: string; email: string; role: string } | null;
 }
@@ -22,7 +21,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   activeBreachCount,
   onOpenBudget,
   onOpenLogin,
-  onOpenProofOfWork,
   onOpenTutorial,
   currentUser,
 }) => {
@@ -84,17 +82,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <BookOpen className="h-3.5 w-3.5 text-sky-600" />
               <span>Tutorial</span>
-            </button>
-
-            {/* Proof of Work PDF Button */}
-            <button
-              onClick={onOpenProofOfWork}
-              className="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold hover:bg-emerald-100 transition-all shadow-xs"
-              title="View & Export Proof of Work PDF"
-            >
-              <FileText className="h-3.5 w-3.5 text-emerald-600" />
-              <span className="hidden sm:inline">Proof of Work (PDF)</span>
-              <span className="sm:hidden">PDF</span>
             </button>
 
             {/* Grant Budget Button */}

@@ -226,8 +226,8 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
             <div className="flex items-start space-x-2.5 p-2 bg-purple-50 border border-purple-200 rounded-lg">
               <span className="h-5 w-5 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold text-xs shrink-0">3</span>
               <div>
-                <strong className="text-purple-950 font-semibold block text-[11.5px]">Review and Export Proof of Work PDF</strong>
-                <p className="text-[11px] text-slate-600">Click <strong>"Proof of Work (PDF)"</strong> in the header to review official submission dossiers with embedded 16:9 technological framework infographics, or download the full proposal PDF directly.</p>
+                <strong className="text-purple-950 font-semibold block text-[11.5px]">Explore Statutory Penalties & DBT Vouchers</strong>
+                <p className="text-[11px] text-slate-600">Navigate to <strong>"RTPS Penalties (Sec 7 & 9)"</strong> to inspect automated ₹250/day penalty accruals, appellate show-cause notices, and 80% citizen compensation direct benefit transfer vouchers.</p>
               </div>
             </div>
           </div>
