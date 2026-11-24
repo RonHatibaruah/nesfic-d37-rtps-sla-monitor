@@ -334,10 +334,10 @@ export const App: React.FC = () => {
                 Innovation Lead &amp; Engineering
               </span>
               <p className="text-xs text-slate-700">
-                <strong>Lead Applicant:</strong> <span className="text-slate-900 font-semibold">Abhishek Satyam</span>
+                <strong>Lead Applicant:</strong> <span className="text-slate-900 font-bold">Abhisekh Satyam</span>
               </p>
               <p className="text-xs text-slate-700">
-                <strong>Organization:</strong> <span className="text-slate-900 font-semibold">RazorNext Software Pvt Ltd</span>
+                <strong>Entity / Organization:</strong> <span className="text-slate-900 font-bold">RazorNext Software Pvt Ltd</span>
               </p>
               <p className="text-[11px] text-slate-500">
                 North East Seva First Innovation Challenge 2026 (AISF)
@@ -399,18 +399,21 @@ export const App: React.FC = () => {
           </div>
 
           {/* Legal Disclaimer Box */}
-          <div className="bg-slate-50 border border-slate-200 rounded-lg p-3 text-[11px] text-slate-600 leading-relaxed">
-            <strong className="text-slate-800 font-semibold block mb-0.5">Disclaimer:</strong>
-            This application (<span className="font-semibold text-slate-700">Sewa-Drishti</span>) is an advanced GovTech decision-support and telemetric SLA observability prototype engineered for the <strong>North East Seva First Innovation Challenge 2026 (Challenge ID: NESFIC-D-37)</strong> under the Assam Innovation &amp; Startup Foundation (AISF), Department of Administrative Reforms, Training, Pension &amp; Public Grievances, Government of Assam. Telemetry data feeds, citizen service queues, and compliance scores demonstrated herein are simulated for architectural validation, load testing, and technical evaluation.
+          <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 text-[11px] text-slate-600 leading-relaxed shadow-2xs">
+            <div className="flex items-center gap-1.5 mb-1 text-slate-800 font-bold uppercase tracking-wider text-[10px]">
+              <ShieldCheck className="h-3.5 w-3.5 text-sky-600" />
+              <span>Official Prototype &amp; Innovation Disclaimer</span>
+            </div>
+            This application (<span className="font-semibold text-slate-700">Sewa-Drishti</span>) is an advanced GovTech decision-support and telemetric SLA observability prototype engineered by <strong>RazorNext Software Pvt Ltd</strong> (Lead Applicant: <strong>Abhisekh Satyam</strong>) for the <strong>North East Seva First Innovation Challenge 2026 (Challenge ID: NESFIC-D-37)</strong> under the Assam Innovation &amp; Startup Foundation (AISF), Department of Administrative Reforms, Training, Pension &amp; Public Grievances, Government of Assam. Telemetry data feeds, citizen service queues, and compliance scores demonstrated herein are simulated for architectural validation, load testing, and technical evaluation.
           </div>
 
           {/* Bottom Copyright Bar */}
-          <div className="flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 pt-1 gap-2">
+          <div className="flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-100 gap-2">
             <div>
-              <span>© 2026 RazorNext Software Pvt Ltd. All rights reserved.</span>
+              <span className="font-semibold text-slate-700">© 2026 RazorNext Software Pvt Ltd.</span> <span>All rights reserved.</span>
             </div>
             <div className="flex items-center space-x-3">
-              <span>Lead Applicant: <strong className="text-slate-700">Abhishek Satyam</strong></span>
+              <span>Lead Applicant: <strong className="text-slate-800 font-semibold">Abhisekh Satyam</strong></span>
               <span>·</span>
               <span>State of Assam RTPS Ecosystem (NESFIC-D-37)</span>
             </div>
