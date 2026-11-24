@@ -1,0 +1,9 @@
+# Robots.txt for Sewa-Drishti RTPS SLA Monitor (NESFIC-D-37)
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /images/
+Allow: /*.pdf$
+
+# Canonical Sitemap
+Sitemap: https://nesfic-d37-rtps-sla-monitor.pages.dev/sitemap.xml

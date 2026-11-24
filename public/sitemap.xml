@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:geo="http://www.google.com/geo/schemas/sitemap/1.0"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Main Platform Overview -->
+  <url>
+    <loc>https://nesfic-d37-rtps-sla-monitor.pages.dev/</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://nesfic-d37-rtps-sla-monitor.pages.dev/assets/infographic_architecture.png</image:loc>
+      <image:title>Sewa-Drishti Enterprise Telemetry &amp; SLA Monitoring Architecture</image:title>
+      <image:caption>Continuous RTPS Service Delivery &amp; SLA Monitoring Platform for Government of Assam</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Deep Link: DPS & Office Performance Index -->
+  <url>
+    <loc>https://nesfic-d37-rtps-sla-monitor.pages.dev/#dps-index</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://nesfic-d37-rtps-sla-monitor.pages.dev/assets/infographic_dopi_scoring.png</image:loc>
+      <image:title>DOPI Multi-Factor Performance Index</image:title>
+    </image:image>
+  </url>
+
+  <!-- Deep Link: Bottleneck Heatmap & Process Mining -->
+  <url>
+    <loc>https://nesfic-d37-rtps-sla-monitor.pages.dev/#bottlenecks</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://nesfic-d37-rtps-sla-monitor.pages.dev/assets/infographic_bottlenecks.png</image:loc>
+      <image:title>RTPS Stage Bottleneck Heatmap &amp; Process Mining Diagnostic</image:title>
+    </image:image>
+  </url>
+
+  <!-- Deep Link: Live Application Stream -->
+  <url>
+    <loc>https://nesfic-d37-rtps-sla-monitor.pages.dev/#applications</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Deep Link: RTPS Section 7 & 9 Penalties -->
+  <url>
+    <loc>https://nesfic-d37-rtps-sla-monitor.pages.dev/#penalties</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://nesfic-d37-rtps-sla-monitor.pages.dev/assets/infographic_penalty_dbt.png</image:loc>
+      <image:title>Section 7 and 9 Statutory Penalty and DBT Compensation Model</image:title>
+    </image:image>
+  </url>
+
+  <!-- Deep Link: Application Tutorial -->
+  <url>
+    <loc>https://nesfic-d37-rtps-sla-monitor.pages.dev/#tutorial</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://nesfic-d37-rtps-sla-monitor.pages.dev/assets/infographic_user_journey.png</image:loc>
+      <image:title>Sewa-Drishti Multi-Stakeholder User Journey &amp; Tutorial</image:title>
+    </image:image>
+  </url>
+
+  <!-- Official Proposal PDF Dossier -->
+  <url>
+    <loc>https://nesfic-d37-rtps-sla-monitor.pages.dev/NESFIC-D-37_Complete_Proposal.pdf</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Proof of Work PDF Dossier -->
+  <url>
+    <loc>https://nesfic-d37-rtps-sla-monitor.pages.dev/Sewa-Drishti_NESFIC-D-37_Proof_of_Work.pdf</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>

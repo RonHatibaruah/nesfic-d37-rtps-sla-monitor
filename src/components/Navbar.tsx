@@ -29,13 +29,21 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Brand & Gov Branding */}
-          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setActiveTab('overview')}>
-            <div className="h-10 w-10 rounded-lg bg-gradient-to-tr from-sky-600 to-indigo-600 flex items-center justify-center shadow-md ring-1 ring-sky-500/20">
+          <a
+            href="#overview"
+            className="flex items-center space-x-3 cursor-pointer group"
+            onClick={(e) => {
+              e.preventDefault();
+              setActiveTab('overview');
+              window.location.hash = 'overview';
+            }}
+          >
+            <div className="h-10 w-10 rounded-lg bg-gradient-to-tr from-sky-600 to-indigo-600 flex items-center justify-center shadow-md ring-1 ring-sky-500/20 group-hover:scale-105 transition-transform">
               <Shield className="h-6 w-6 text-white" />
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <span className="font-bold text-lg tracking-tight text-slate-900">
+                <span className="font-bold text-lg tracking-tight text-slate-900 group-hover:text-sky-700 transition-colors">
                   SEWA-DRISHTI
                 </span>
                 <span className="px-2 py-0.5 text-xs font-semibold uppercase tracking-wider bg-sky-50 text-sky-700 border border-sky-200 rounded">
@@ -43,13 +51,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </span>
               </div>
               <p className="text-xs text-slate-500 font-medium">
-                Continuous RTPS Service Delivery & SLA Monitor · Govt of Assam
+                Continuous RTPS Service Delivery &amp; SLA Monitor · Govt of Assam
               </p>
             </div>
-          </div>
+          </a>
 
           {/* Navigation Tabs */}
-          <nav className="hidden md:flex space-x-1">
+          <nav className="hidden md:flex space-x-1" aria-label="Main Navigation">
             {[
               { id: 'overview', label: 'Overview & Radar' },
               { id: 'dps-index', label: 'DPS & Office Index' },
@@ -58,9 +66,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               { id: 'penalties', label: 'RTPS Penalties & Incentives' },
               ...(currentUser ? [{ id: 'admin', label: 'Admin Panel' }] : []),
             ].map((tab) => (
-              <button
+              <a
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                href={`#${tab.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActiveTab(tab.id);
+                  window.location.hash = tab.id;
+                }}
+                aria-current={activeTab === tab.id ? 'page' : undefined}
                 className={`px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
                   activeTab === tab.id
                     ? 'bg-sky-50 text-sky-700 border border-sky-200 shadow-xs'
@@ -68,7 +82,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }`}
               >
                 {tab.label}
-              </button>
+              </a>
             ))}
           </nav>
 

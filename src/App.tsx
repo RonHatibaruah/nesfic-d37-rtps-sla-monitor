@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { MetricCards } from './components/MetricCards';
 import { DistrictHeatmap } from './components/DistrictHeatmap';
@@ -12,7 +12,7 @@ import { BudgetModal } from './components/BudgetModal';
 import { LoginModal } from './components/LoginModal';
 import { AdminPanel } from './components/AdminPanel';
 import { TutorialModal } from './components/TutorialModal';
-import { IndianRupee, ArrowRight, ShieldCheck, Lock } from 'lucide-react';
+import { IndianRupee, ArrowRight, ShieldCheck, Lock, MapPin, Compass, FileText } from 'lucide-react';
 import {
   MOCK_APPLICATIONS,
   MOCK_DPS_RECORDS,
@@ -40,13 +40,41 @@ export const App: React.FC = () => {
   const [totalPenaltiesINR, setTotalPenaltiesINR] = useState<number>(1236250);
   const avgResolutionDays = 9.4;
 
+  // Synchronize activeTab with URL hash for SEO & Deep Linking
+  useEffect(() => {
+    const handleHashSync = () => {
+      const hash = window.location.hash.replace('#', '');
+      const validTabs = ['overview', 'dps-index', 'bottlenecks', 'applications', 'penalties', 'admin'];
+      if (validTabs.includes(hash)) {
+        setActiveTab(hash);
+      } else if (hash === 'tutorial') {
+        setIsTutorialOpen(true);
+      } else if (hash === 'budget') {
+        setIsBudgetOpen(true);
+      } else if (!hash) {
+        setActiveTab('overview');
+      }
+    };
+
+    handleHashSync();
+    window.addEventListener('hashchange', handleHashSync);
+    return () => window.removeEventListener('hashchange', handleHashSync);
+  }, []);
+
+  const handleTabChange = (newTab: string) => {
+    setActiveTab(newTab);
+    if (window.location.hash !== `#${newTab}`) {
+      window.history.pushState(null, '', `#${newTab}`);
+    }
+  };
+
   const handleSelectDistrict = (district: string) => {
     setSelectedDistrict(district);
   };
 
   const handleLoginSuccess = (user: { name: string; email: string; role: string }) => {
     setCurrentUser(user);
-    setActiveTab('admin');
+    handleTabChange('admin');
   };
 
   const handleTriggerMockBatch = () => {
@@ -59,7 +87,7 @@ export const App: React.FC = () => {
       {/* Top Navigation */}
       <Navbar
         activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        setActiveTab={handleTabChange}
         selectedRole={selectedRole}
         setSelectedRole={setSelectedRole}
         activeBreachCount={MOCK_ALERTS.length}
@@ -89,7 +117,7 @@ export const App: React.FC = () => {
 
         {/* Global Metric Cards (Always visible on Overview) */}
         {activeTab === 'overview' && (
-          <>
+          <section id="overview" className="space-y-6">
             <MetricCards
               totalApps={totalApps}
               complianceRate={complianceRate}
@@ -150,7 +178,7 @@ export const App: React.FC = () => {
                   <button
                     onClick={() => {
                       if (currentUser) {
-                        setActiveTab('admin');
+                        handleTabChange('admin');
                       } else {
                         setIsLoginOpen(true);
                       }
@@ -186,18 +214,18 @@ export const App: React.FC = () => {
 
             {/* DPS Index Preview */}
             <DPSScoresTable dpsRecords={MOCK_DPS_RECORDS} />
-          </>
+          </section>
         )}
 
         {/* Admin Panel Tab */}
         {activeTab === 'admin' && (
-          <div className="space-y-6">
+          <section id="admin" className="space-y-6">
             {currentUser ? (
               <AdminPanel
                 currentUser={currentUser}
                 onLogout={() => {
                   setCurrentUser(null);
-                  setActiveTab('overview');
+                  handleTabChange('overview');
                 }}
                 onTriggerMockBatch={handleTriggerMockBatch}
               />
@@ -216,47 +244,47 @@ export const App: React.FC = () => {
                 </button>
               </div>
             )}
-          </div>
+          </section>
         )}
 
         {/* DPS and Office Tab */}
         {activeTab === 'dps-index' && (
-          <div className="space-y-6">
+          <section id="dps-index" className="space-y-6">
             <DPSScoresTable dpsRecords={MOCK_DPS_RECORDS} />
             <PenaltyCalculator />
-          </div>
+          </section>
         )}
 
         {/* Bottlenecks Tab */}
         {activeTab === 'bottlenecks' && (
-          <div className="space-y-6">
+          <section id="bottlenecks" className="space-y-6">
             <BottleneckSankey bottlenecks={MOCK_BOTTLENECKS} />
             <DistrictHeatmap
               districts={MOCK_DISTRICTS}
               onSelectDistrict={handleSelectDistrict}
               selectedDistrict={selectedDistrict}
             />
-          </div>
+          </section>
         )}
 
         {/* Live Applications Tab */}
         {activeTab === 'applications' && (
-          <div className="space-y-6">
+          <section id="applications" className="space-y-6">
             <LiveApplicationsTable
               applications={MOCK_APPLICATIONS}
               selectedDistrict={selectedDistrict}
               onClearDistrictFilter={() => setSelectedDistrict(null)}
             />
             <LiveBreachFeed alerts={MOCK_ALERTS} />
-          </div>
+          </section>
         )}
 
         {/* Penalties Tab */}
         {activeTab === 'penalties' && (
-          <div className="space-y-6">
+          <section id="penalties" className="space-y-6">
             <PenaltyCalculator />
             <DPSScoresTable dpsRecords={MOCK_DPS_RECORDS} />
-          </div>
+          </section>
         )}
       </main>
 
@@ -267,7 +295,7 @@ export const App: React.FC = () => {
       <TutorialModal
         isOpen={isTutorialOpen}
         onClose={() => setIsTutorialOpen(false)}
-        onNavigateTab={(tab) => setActiveTab(tab)}
+        onNavigateTab={(tab) => handleTabChange(tab)}
         onOpenLogin={() => setIsLoginOpen(true)}
         onOpenBudget={() => setIsBudgetOpen(true)}
       />
@@ -293,7 +321,7 @@ export const App: React.FC = () => {
                 </span>
               </div>
               <p className="text-slate-600 font-medium text-xs leading-relaxed">
-                Continuous RTPS Service Delivery Performance & SLA Monitoring Platform.
+                Continuous RTPS Service Delivery Performance &amp; SLA Monitoring Platform.
               </p>
               <p className="text-[11px] text-slate-400">
                 Production: <a href="https://nesfic-d37-rtps-sla-monitor.pages.dev" target="_blank" rel="noopener noreferrer" className="text-sky-600 hover:underline">nesfic-d37-rtps-sla-monitor.pages.dev</a>
@@ -303,7 +331,7 @@ export const App: React.FC = () => {
             {/* Column 2: Applicant & Organization */}
             <div className="space-y-1.5">
               <span className="text-slate-900 font-bold block text-xs uppercase tracking-wider">
-                Innovation Lead & Engineering
+                Innovation Lead &amp; Engineering
               </span>
               <p className="text-xs text-slate-700">
                 <strong>Lead Applicant:</strong> <span className="text-slate-900 font-semibold">Abhishek Satyam</span>
@@ -316,24 +344,64 @@ export const App: React.FC = () => {
               </p>
             </div>
 
-            {/* Column 3: Government Stakeholder */}
+            {/* Column 3: Government Stakeholder & GEO Location */}
             <div className="space-y-1.5 md:text-right">
               <span className="text-slate-900 font-bold block text-xs uppercase tracking-wider">
-                Host Department & State
+                Host Department &amp; State
               </span>
               <p className="text-xs text-slate-700 font-medium">
-                Department of Administrative Reforms, Training, Pension & Public Grievances
+                Department of Administrative Reforms, Training, Pension &amp; Public Grievances
               </p>
-              <p className="text-xs text-slate-600">
-                Government of Assam · Dispur, Guwahati
+              <p className="text-xs text-slate-600 flex items-center md:justify-end gap-1">
+                <MapPin className="h-3 w-3 text-sky-600 inline" />
+                <span>Dispur, Guwahati, Kamrup Metropolitan, Assam 781006, India</span>
               </p>
+              <p className="text-[10px] text-slate-400">
+                Coordinates: 26.1445° N, 91.7362° E · Region: IN-AS
+              </p>
+            </div>
+          </div>
+
+          {/* Deep Navigation & GEO-Friendly Index Links */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 py-2 border-b border-slate-200 text-[11px]">
+            <div>
+              <span className="font-semibold text-slate-800 block mb-1">Deep Link Navigation</span>
+              <ul className="space-y-1 text-slate-600">
+                <li><a href="#overview" onClick={() => handleTabChange('overview')} className="hover:text-sky-600 transition-colors">→ Executive Radar &amp; KPIs</a></li>
+                <li><a href="#dps-index" onClick={() => handleTabChange('dps-index')} className="hover:text-sky-600 transition-colors">→ DPS Accountability Index</a></li>
+                <li><a href="#bottlenecks" onClick={() => handleTabChange('bottlenecks')} className="hover:text-sky-600 transition-colors">→ Bottleneck Stage Heatmap</a></li>
+              </ul>
+            </div>
+            <div>
+              <span className="font-semibold text-slate-800 block mb-1">Live Telemetry &amp; Operations</span>
+              <ul className="space-y-1 text-slate-600">
+                <li><a href="#applications" onClick={() => handleTabChange('applications')} className="hover:text-sky-600 transition-colors">→ Citizen Application Stream</a></li>
+                <li><a href="#penalties" onClick={() => handleTabChange('penalties')} className="hover:text-sky-600 transition-colors">→ Section 7 Penalty Ledger</a></li>
+                <li><a href="#tutorial" onClick={() => setIsTutorialOpen(true)} className="hover:text-sky-600 transition-colors">→ Platform Guide &amp; Tutorial</a></li>
+              </ul>
+            </div>
+            <div>
+              <span className="font-semibold text-slate-800 block mb-1">Official Submission Artifacts</span>
+              <ul className="space-y-1 text-slate-600">
+                <li><a href="/NESFIC-D-37_Complete_Proposal.pdf" target="_blank" rel="noopener noreferrer" className="text-sky-700 hover:underline flex items-center gap-1"><FileText className="h-3 w-3" /> Technical Proposal (PDF)</a></li>
+                <li><a href="/Sewa-Drishti_NESFIC-D-37_Proof_of_Work.pdf" target="_blank" rel="noopener noreferrer" className="text-sky-700 hover:underline flex items-center gap-1"><FileText className="h-3 w-3" /> Proof of Work (PDF)</a></li>
+                <li><a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:underline">XML Geo-Sitemap</a></li>
+              </ul>
+            </div>
+            <div>
+              <span className="font-semibold text-slate-800 block mb-1">Assam GovTech Ecosystem</span>
+              <ul className="space-y-1 text-slate-600">
+                <li><a href="https://art.assam.gov.in" target="_blank" rel="noopener noreferrer" className="hover:underline">ARTPG Department, Assam</a></li>
+                <li><a href="https://sewasetu.assam.gov.in" target="_blank" rel="noopener noreferrer" className="hover:underline">Sewa Setu Citizen Portal</a></li>
+                <li><a href="https://assam.gov.in" target="_blank" rel="noopener noreferrer" className="hover:underline">Government of Assam Portal</a></li>
+              </ul>
             </div>
           </div>
 
           {/* Legal Disclaimer Box */}
           <div className="bg-slate-50 border border-slate-200 rounded-lg p-3 text-[11px] text-slate-600 leading-relaxed">
             <strong className="text-slate-800 font-semibold block mb-0.5">Disclaimer:</strong>
-            This application (<span className="font-semibold text-slate-700">Sewa-Drishti</span>) is an advanced GovTech decision-support and telemetric SLA observability prototype engineered for the <strong>North East Seva First Innovation Challenge 2026 (Challenge ID: NESFIC-D-37)</strong> under the Assam Innovation & Startup Foundation (AISF), Department of Administrative Reforms, Training, Pension & Public Grievances, Government of Assam. Telemetry data feeds, citizen service queues, and compliance scores demonstrated herein are simulated for architectural validation, load testing, and technical evaluation.
+            This application (<span className="font-semibold text-slate-700">Sewa-Drishti</span>) is an advanced GovTech decision-support and telemetric SLA observability prototype engineered for the <strong>North East Seva First Innovation Challenge 2026 (Challenge ID: NESFIC-D-37)</strong> under the Assam Innovation &amp; Startup Foundation (AISF), Department of Administrative Reforms, Training, Pension &amp; Public Grievances, Government of Assam. Telemetry data feeds, citizen service queues, and compliance scores demonstrated herein are simulated for architectural validation, load testing, and technical evaluation.
           </div>
 
           {/* Bottom Copyright Bar */}
@@ -344,7 +412,7 @@ export const App: React.FC = () => {
             <div className="flex items-center space-x-3">
               <span>Lead Applicant: <strong className="text-slate-700">Abhishek Satyam</strong></span>
               <span>·</span>
-              <span>State of Assam RTPS Ecosystem</span>
+              <span>State of Assam RTPS Ecosystem (NESFIC-D-37)</span>
             </div>
           </div>
         </div>
