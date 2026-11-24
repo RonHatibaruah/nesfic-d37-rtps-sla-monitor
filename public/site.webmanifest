@@ -1,0 +1,26 @@
+{
+  "name": "Sewa-Drishti RTPS SLA Monitor",
+  "short_name": "Sewa-Drishti",
+  "description": "Continuous RTPS Service Delivery & SLA Monitoring Platform · Govt of Assam",
+  "icons": [
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0284c7",
+  "background_color": "#0f172a"
+}
