@@ -380,12 +380,48 @@ def create_proposal_pdf(filename):
                 story.append(Paragraph(para.strip(), styles['CustomBody']))
         story.append(Spacer(1, 4))
 
+        # Embed Bottleneck Diagnostic under Section 1
+        if "1. Problem Understanding" in title:
+            b_img = os.path.join(PUBLIC_ASSETS, "infographic_bottlenecks.png")
+            story.extend(create_infographic_flowable(
+                b_img,
+                "Figure 1.1: RTPS Service Delivery Process Mining & Stage Bottleneck Diagnostic (Highlighting Lot Mandal Field Inquest Latency)",
+                styles
+            ))
+
+        # Embed User Journey Infographic under Section 3
+        elif "3. User Journey" in title:
+            uj_img = os.path.join(PUBLIC_ASSETS, "infographic_user_journey.png")
+            story.extend(create_infographic_flowable(
+                uj_img,
+                "Figure 3.1: Sewa-Drishti Multi-Stakeholder User Journey & Decision Workflow (Citizen, DPS Officer & DC/Appellate Authority)",
+                styles
+            ))
+
         # Embed Architecture Infographic under Section 4
-        if "4. Technology & Solution Architecture" in title:
+        elif "4. Technology & Solution Architecture" in title:
             arch_img = os.path.join(PUBLIC_ASSETS, "infographic_architecture.png")
             story.extend(create_infographic_flowable(
                 arch_img,
                 "Figure 4.1: Sewa-Drishti Enterprise Telemetry & SLA Monitoring Architecture (Event Ingestion, ASDC TimescaleDB, DOPI Core & Notification)",
+                styles
+            ))
+
+        # Embed Roadmap Infographic under Section 6
+        elif "6. Development Timeline" in title:
+            rm_img = os.path.join(PUBLIC_ASSETS, "infographic_roadmap_milestones.png")
+            story.extend(create_infographic_flowable(
+                rm_img,
+                "Figure 6.1: 24-Week Phased Development Roadmap & Milestone Gatelog (Discovery through Statewide ASDC Handover)",
+                styles
+            ))
+
+        # Embed Security & DPDP Infographic under Section 10
+        elif "10. Security, Privacy" in title:
+            sec_img = os.path.join(PUBLIC_ASSETS, "infographic_security_dpdp.png")
+            story.extend(create_infographic_flowable(
+                sec_img,
+                "Figure 10.1: Enterprise Zero-Trust Architecture, DPDP Compliance Shield & Cryptographic Audit Trail",
                 styles
             ))
 
@@ -673,8 +709,34 @@ def create_proof_of_work_pdf(filename):
         styles
     ))
 
-    # 5. Indicative Resource & Budget Allocation
-    story.append(Paragraph("5. Indicative Resource & Budget Allocation (₹40 Lakhs Total Grant)", styles['SectionHeading']))
+    # 5. Multi-Stakeholder User Journey & Decision Workflow
+    story.append(Paragraph("5. Multi-Stakeholder User Journey & Decision Workflow", styles['SectionHeading']))
+    story.append(Paragraph(
+        "Sewa-Drishti provides specialized operational views and interaction loops across three distinct administrative tiers: <b>Citizens</b> (transparent tracking & automated DBT vouchers), <b>Designated Public Servants</b> (daily triage queue & T-48h push alerts), and <b>Deputy Commissioners / Appellate Authorities</b> (statewide radar, circle drilldowns & 1-click Section 7 notices).",
+        styles['CustomBody']
+    ))
+    uj_img = os.path.join(PUBLIC_ASSETS, "infographic_user_journey.png")
+    story.extend(create_infographic_flowable(
+        uj_img,
+        "Figure 5: Sewa-Drishti Multi-Stakeholder User Journey & Decision Workflow (Citizen, DPS Officer & DC/Appellate Authority)",
+        styles
+    ))
+
+    # 6. Zero-Trust Security, DPDP Compliance & Cryptographic Audit
+    story.append(Paragraph("6. Zero-Trust Architecture, DPDP Compliance & Cryptographic Audit Trail", styles['SectionHeading']))
+    story.append(Paragraph(
+        "The platform enforces strict zero-trust principles: deployed entirely inside the Assam State Data Centre (ASDC) VPC with TLS 1.3/mTLS encryption, complete citizen tokenization (zero PII/Aadhaar stored), role-based e-Pramaan SSO access, and append-only SHA-256 hash chains ensuring legal admissibility for Section 7 salary deductions.",
+        styles['CustomBody']
+    ))
+    sec_img = os.path.join(PUBLIC_ASSETS, "infographic_security_dpdp.png")
+    story.extend(create_infographic_flowable(
+        sec_img,
+        "Figure 6: Enterprise Zero-Trust Architecture, DPDP Compliance Shield & Cryptographic Audit Trail",
+        styles
+    ))
+
+    # 7. Indicative Resource & Budget Allocation
+    story.append(Paragraph("7. Indicative Resource & Budget Allocation (₹40 Lakhs Total Grant)", styles['SectionHeading']))
     budget_data = [
         [
             Paragraph("Budget Head", styles['TableCellHeader']),
@@ -730,11 +792,11 @@ def create_proof_of_work_pdf(filename):
     story.append(budget_table)
     story.append(Spacer(1, 6))
 
-    # Figure 5: Budget Blueprint
+    # Figure 7: Budget Blueprint
     budget_img = os.path.join(PUBLIC_ASSETS, "infographic_grant_budget.png")
     story.extend(create_infographic_flowable(
         budget_img,
-        "Figure 5: Indicative Grant Allocation & Resource Blueprint (₹40.00 Lakhs Problem Statement Grant Deployment)",
+        "Figure 7: Indicative Grant Allocation & Resource Blueprint (₹40.00 Lakhs Problem Statement Grant Deployment)",
         styles
     ))
 

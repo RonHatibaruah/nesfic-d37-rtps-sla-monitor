@@ -12,6 +12,7 @@ import { BudgetModal } from './components/BudgetModal';
 import { LoginModal } from './components/LoginModal';
 import { AdminPanel } from './components/AdminPanel';
 import { ProofOfWorkView } from './components/ProofOfWorkView';
+import { TutorialModal } from './components/TutorialModal';
 import { IndianRupee, ArrowRight, ShieldCheck, Lock, FileText } from 'lucide-react';
 import {
   MOCK_APPLICATIONS,
@@ -30,6 +31,7 @@ export const App: React.FC = () => {
   const [isBudgetOpen, setIsBudgetOpen] = useState<boolean>(false);
   const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
   const [isProofOfWorkOpen, setIsProofOfWorkOpen] = useState<boolean>(false);
+  const [isTutorialOpen, setIsTutorialOpen] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState<{ name: string; email: string; role: string } | null>(null);
 
   // Dynamic telemetry counters
@@ -66,6 +68,7 @@ export const App: React.FC = () => {
         onOpenBudget={() => setIsBudgetOpen(true)}
         onOpenLogin={() => setIsLoginOpen(true)}
         onOpenProofOfWork={() => setIsProofOfWorkOpen(true)}
+        onOpenTutorial={() => setIsTutorialOpen(true)}
         currentUser={currentUser}
       />
 
@@ -274,6 +277,15 @@ export const App: React.FC = () => {
 
       {/* Grant Budget Modal */}
       <BudgetModal isOpen={isBudgetOpen} onClose={() => setIsBudgetOpen(false)} />
+
+      {/* Tutorial Modal */}
+      <TutorialModal
+        isOpen={isTutorialOpen}
+        onClose={() => setIsTutorialOpen(false)}
+        onNavigateTab={(tab) => setActiveTab(tab)}
+        onOpenLogin={() => setIsLoginOpen(true)}
+        onOpenBudget={() => setIsBudgetOpen(true)}
+      />
 
       {/* Login Modal */}
       <LoginModal

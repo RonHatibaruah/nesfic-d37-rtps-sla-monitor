@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Bell, AlertTriangle, RefreshCw, IndianRupee, Lock, FileText, UserCheck } from 'lucide-react';
+import { Shield, Bell, AlertTriangle, RefreshCw, IndianRupee, Lock, FileText, UserCheck, BookOpen } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: string;
@@ -10,6 +10,7 @@ interface NavbarProps {
   onOpenBudget: () => void;
   onOpenLogin: () => void;
   onOpenProofOfWork: () => void;
+  onOpenTutorial: () => void;
   currentUser: { name: string; email: string; role: string } | null;
 }
 
@@ -22,6 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenBudget,
   onOpenLogin,
   onOpenProofOfWork,
+  onOpenTutorial,
   currentUser,
 }) => {
   return (
@@ -74,6 +76,16 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Right Side Tools */}
           <div className="flex items-center space-x-2 sm:space-x-2.5">
+            {/* Tutorial & Guide Link */}
+            <button
+              onClick={onOpenTutorial}
+              className="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-sky-50 text-sky-700 border border-sky-200 text-xs font-semibold hover:bg-sky-100 transition-all shadow-xs"
+              title="Application Tutorial: What it does & How to use it"
+            >
+              <BookOpen className="h-3.5 w-3.5 text-sky-600" />
+              <span>Tutorial</span>
+            </button>
+
             {/* Proof of Work PDF Button */}
             <button
               onClick={onOpenProofOfWork}
